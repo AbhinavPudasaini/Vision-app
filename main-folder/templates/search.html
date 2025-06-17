@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Search Images</h2>
+
+<form method="POST" enctype="multipart/form-data">
+  <select name="mode">
+    <option value="text">Text</option>
+    <option value="face">Face</option>
+    <option value="face_text">Face + Text</option>
+    <option value="multi_face">Multiple Faces</option>
+  </select>
+  <input type="text" name="query" placeholder="Search text">
+  <input type="file" name="face_image">
+  <input type="text" name="text_prompt" placeholder="Text prompt (for Face+Text)">
+  <button type="submit">Search</button>
+</form>
+
+
+{% if results %}
+    <h3>Search Results:</h3>
+    {% for img in results %}
+        <img src="{{ url_for('static', filename='uploads/' + img) }}" width="150px">
+    {% endfor %}
+{% endif %}
+{% endblock %}

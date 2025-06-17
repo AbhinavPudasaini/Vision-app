@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Batch Image Processing</h2>
+
+<form method="POST">
+  <label>Resize:</label>
+  <input type="checkbox" name="resize" value="yes">
+  Width: <input type="number" name="width">
+  Height: <input type="number" name="height">
+
+  <label>Watermark:</label>
+  <input type="checkbox" name="watermark" value="yes">
+  Text: <input type="text" name="watermark_text">
+  Position: <input type="text" name="watermark_position" value="bottom_right">
+
+  <label>Blur Background:</label>
+  <input type="checkbox" name="blur" value="yes">
+
+  <label>Convert Format:</label>
+  <select name="convert">
+    <option value="none">None</option>
+    <option value="JPEG">JPEG</option>
+    <option value="PNG">PNG</option>
+    <option value="WEBP">WEBP</option>
+  </select>
+
+  <button type="submit">Start Batch</button>
+</form>
+
+
+{% if processed %}
+    <h3>Processed Images:</h3>
+    {% for img in processed %}
+        <img src="{{ url_for('static', filename='processed/' + img) }}" width="150px">
+    {% endfor %}
+{% endif %}
+{% endblock %}
