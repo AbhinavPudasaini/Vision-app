@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Image Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>📁 Menu</h2>
+            <a href="{{ url_for('index') }}">🏠 Home</a>
+            <a href="{{ url_for('upload') }}">📤 Upload</a>
+            <a href="{{ url_for('search') }}">🔍 Search</a>
+            <a href="{{ url_for('grouping') }}">👥 Grouping</a>
+            <a href="{{ url_for('batch') }}">🛠️ Batch Edit</a>
+        </div>
+
+        <div class="main">
+            <div class="topbar">
+                <form action="{{ url_for('search') }}" method="GET">
+                    <input type="text" name="query" placeholder="Search by text, face, or both..." />
+                    <button type="submit">🔎</button>
+                </form>
+            </div>
+
+            <div class="content">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

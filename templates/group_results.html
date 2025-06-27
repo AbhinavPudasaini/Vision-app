@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grouped Images</title>
+    <style>
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .gallery img {
+            width: 220px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .back-button {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <h2>🖼️ Grouped Images</h2>
+
+    {% if results %}
+    <div class="gallery">
+        {% for item in results %}
+            <img src="{{ item.web_path }}" alt="Grouped Image">
+        {% endfor %}
+    </div>
+    {% else %}
+        <p>No matching images found.</p>
+    {% endif %}
+
+    <div class="back-button">
+        <a href="/group">🔙 Back to Grouping</a>
+    </div>
+</body>
+</html>
