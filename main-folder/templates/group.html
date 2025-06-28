@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Group Images</title>
+</head>
+<body>
+    <h2>📂 Group Images</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <label><input type="radio" name="mode" value="face" required> Group by Faces</label><br>
+        <label><input type="radio" name="mode" value="clip_text"> Group by Visual Text Prompt</label><br><br>
+
+        <div id="face-upload">
+            <label>Upload one or more face images:</label>
+            <input type="file" name="face_images" multiple>
+        </div><br>
+
+        <div id="clip-prompt">
+            <label>Enter visual prompt:</label>
+            <input type="text" name="text_prompt" placeholder="e.g., people on beach">
+        </div><br>
+
+        <button type="submit">Group Images</button>
+    </form>
+</body>
+</html>

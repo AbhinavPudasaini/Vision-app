@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f9f9f9;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .featured {
+            text-align: center;
+            background-color: #fff8e1;
+            border: 2px solid #ffd54f;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+
+        .featured img {
+            max-width: 300px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .image-card {
+            background-color: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            width: 220px;
+            text-align: center;
+        }
+
+        .image-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+        }
+
+        .back-button {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .back-button a {
+            text-decoration: none;
+            color: white;
+            background-color: #4285f4;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>✨ Top Match</h2>
+    {% if results and results[0] %}
+        <div class="featured">
+            <img src="{{ results[0].web_path }}" alt="Top Match">
+            <p style="margin-top: 10px;">
+                {% if results[0].score %}
+                    Score: {{ "%.4f"|format(results[0].score) }}
+                {% elif results[0].face_score %}
+                    Face: {{ "%.4f"|format(results[0].face_score) }},
+                    Text: {{ "%.4f"|format(results[0].clip_score) }}
+                {% endif %}
+            </p>
+        </div>
+    {% else %}
+        <p>No result found.</p>
+    {% endif %}
+
+    {% if results|length > 1 %}
+        <h2>📸 Other Matches</h2>
+        <div class="gallery">
+            {% for result in results[1:] %}
+                <div class="image-card">
+                    <img src="{{ result.web_path }}" alt="Image">
+                    <p>
+                        {% if result.score %}
+                            Score: {{ "%.4f"|format(result.score) }}
+                        {% elif result.face_score %}
+                            Face: {{ "%.4f"|format(result.face_score) }},
+                            Text: {{ "%.4f"|format(result.clip_score) }}
+                        {% endif %}
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="back-button">
+        <a href="/search">🔙 Back to Search</a>
+    </div>
+
+</body>
+</html>
